@@ -1,42 +1,6 @@
-import numpy as np
 import traceback
 import sys
-
-# Initialize the puzzle with a bidimensional array of integers
-puzzle_22027 = np.array([
-    [1, 2, 3, 4, 5, 6, 5, 0, 4, 0, 7, 8, 0],
-    [5, 6, 8, 0, 0, 6, 9, 8, 10, 9, 3, 5, 9],
-    [6, 9, 0, 11, 11, 0, 0, 5, 12, 8, 9, 12, 5],
-    [2, 0, 11, 3, 2, 1, 2, 12, 13, 5, 7, 9, 0],
-    [0, 11, 3, 2, 7, 10, 8, 7, 9, 12, 7, 5, 0],
-    [7, 3, 9, 5, 10, 7, 7, 2, 3, 5, 9, 0, 0],
-    [5, 0, 7, 10, 8, 7, 9, 14, 10, 12, 7, 2, 0],
-    [3, 0, 9, 7, 7, 5, 6, 2, 0, 9, 5, 3, 10],
-    [0, 7, 5, 7, 9, 12, 2, 0, 15, 0, 16, 9, 12],
-    [10, 3, 2, 5, 0, 9, 15, 7, 9, 15, 10, 12, 9],
-    [16, 9, 15, 15, 10, 0, 2, 3, 13, 9, 0, 17, 0],
-    [9, 14, 5, 10, 12, 8, 0, 10, 13, 5, 8, 2, 12],
-])
-
-# Create a dictionary to store the correspondence between numbers and letters
-correspondence_22027 = {7: 'T', 5: 'I', 3: 'R'}
-
-puzzle_22026 = np.array([
-    [1, 0, 1, 0, 2, 3, 4, 0, 2, 5, 4, 6, 3],
-    [6, 2, 3, 7, 7, 1, 0, 8, 5, 0, 5, 9, 10],
-    [3, 9, 0, 5, 0, 0, 6, 3, 4, 6, 3, 2, 1],
-    [0, 7, 5, 11, 8, 10, 1, 4, 4, 9, 12, 5, 0],
-    [7, 5, 11, 8, 2, 1, 4, 4, 5, 2, 1, 0, 8],
-    [9, 11, 13, 2, 3, 6, 6, 3, 2, 1, 0, 1, 2],
-    [0, 8, 2, 1, 4, 6, 3, 13, 9, 10, 9, 2, 1],
-    [8, 2, 5, 4, 4, 9, 11, 9, 0, 10, 14, 0, 7],
-    [15, 3, 14, 5, 9, 0, 1, 10, 11, 1, 6, 6, 9],
-    [0, 2, 1, 0, 0, 1, 14, 1, 3, 0, 1, 5, 4],
-    [6, 1, 0, 7, 3, 4, 6, 0, 2, 1, 4, 6, 9],
-    [5, 0, 10, 1, 14, 6, 9, 7, 7, 15, 9, 1, 0],
-])
-correspondence_22026 = {6: 'T', 9: 'I', 2: 'R', 5: 'O'}
-
+import db_puz
 
 def display_puzzle(puzzle):
     """
@@ -80,8 +44,9 @@ def remove_matches(letter):
 
 # begin
 
-puzzle = puzzle_22026
-matches_start = correspondence_22026
+# init puzzle data
+puzzle = db_puz.puzzle_22026
+matches_start = db_puz.matches_22026
 matches = matches_start.copy()
 
 display_puzzle(puzzle)
@@ -94,6 +59,7 @@ while True:
         cchain.append('REFRESH')
     else:
         cchain[0] = cchain[0].upper()
+
     # screen refresh
     if cchain[0] == "REFRESH":
         display_puzzle(puzzle)
@@ -163,13 +129,13 @@ while True:
     elif cchain[0] == "H":
         print('\n'
               '\n'
-              '                  A: add correspondence(s)\n'
-              '                     A number letter [number letter] [...]\n'
-              '                  R: remove correspondence(s)\n'
-              '                     R letter [letter] [...]\n'
-              '                  P: print current solution\n'
+              '                  A: add matches\n'
+              '                     usage: A number letter [number letter] [...]\n'
+              '                  R: remove matches\n'
+              '                     usage: R letter [letter] [...]\n'
+              '                  P: print current solution (matches)\n'
               '  REFRESH | <empty>: refresh display\n'
-              '                  X: reset corresponcences\n'
+              '                  X: reset all matches (revert to start)\n'
               '                  H: this text\n'
               '\n')
 
