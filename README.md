@@ -31,6 +31,7 @@ but I'll do it on a project that nobody will care about, so nobody will be pisse
 
 * design a format to define a puzzle - number matrix and known correspondence dict
 * load / save puzzle
+* ANSI color
 
 # About the fancy name
 The program has been completely rewritten from scratch after a first draft,
